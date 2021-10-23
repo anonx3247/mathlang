@@ -15,12 +15,12 @@ func replace(math string) (s string) {
 	corrected := math
 	corrected = replaceFont(corrected)
 	corrected = replaceKeywords(corrected)
+	corrected = getMatrix(corrected)
 	corrected = replaceFrac(corrected)
 	corrected = replaceParnethesis(corrected)
 	corrected = replaceShape(corrected)
 	corrected = replaceSymbol(corrected)
 	corrected = replaceText(corrected)
-	corrected = getMatrix(corrected)
 	s += corrected
 	return
 }
