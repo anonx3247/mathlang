@@ -29,7 +29,7 @@ sudo make install
 ```
 
 ## Syntax
-See the ![wiki](https://github.com/neosapien3247/mathlang/wiki) for syntax
+See the [wiki](https://github.com/neosapien3247/mathlang/wiki) for syntax
 
 ## Projected Usage (currently only piping to stdin is working)
 
