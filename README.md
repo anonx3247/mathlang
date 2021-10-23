@@ -9,14 +9,36 @@ Thus mathlang converts its own syntax to pure math latex code, allowing you to w
 while always allowing you to change to a syntax understood by every math typesetting program wether it be Latex, Markdown, HTML,
 or other.
 
+## Dependencies
+This uses standard go libraries so it doesn't need particular dependencies, simply install go.
+
+## Installation
+```bash
+git clone https://github.com/neosapien3247/mathlang
+```
+```bash
+cd mathlang
+```
+Then to build run:
+```bash
+make
+```
+and to install to `/usr/local/bin` run
+```bash
+sudo make install
+```
+
+## Syntax
+See the [wiki](https://github.com/neosapien3247/mathlang/wiki) for syntax
+
 ## Projected Usage (currently only piping to stdin is working)
 
-```
+```bash
 mathlang -e "expression"
 ```
 This will output the "translation" of the expression into \LaTeX
 
-```
+```bash
 ... | mathlang
 ```
 This will output the `STDIN` translated into \LaTeX
@@ -24,7 +46,7 @@ This can be very useful in certain editors for example, `kakoune`
 by piping the content of a line and binding it, you can translate
 mathlang to \LaTeX on the fly in one keystroke.
 
-```
+```bash
 mathlang -rD "\[" -lD "\]"
 ```
 
@@ -33,7 +55,7 @@ thus allowing you to pipe an entire **file** into the converter and only change 
 the delimiters.
 
 This allows `mathlang` to be used as a preprocessor, e.g:
-```
+```bash
 mathlang -D "$$" -d "$" -f "myfile.md" | pandoc -o myfile.pdf
 ```
 
