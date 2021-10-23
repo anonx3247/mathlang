@@ -9,6 +9,28 @@ Thus mathlang converts its own syntax to pure math latex code, allowing you to w
 while always allowing you to change to a syntax understood by every math typesetting program wether it be Latex, Markdown, HTML,
 or other.
 
+## Dependencies
+This uses standard go libraries so it doesn't need particular dependencies, simply install go.
+
+## Installation
+```
+git clone https://github.com/neosapien3247/mathlang
+```
+```
+cd mathlang
+```
+Then to build run:
+```
+make
+```
+and to install to `/usr/local/bin` run
+```
+sudo make install
+```
+
+## Syntax
+See the wiki for syntax
+
 ## Projected Usage (currently only piping to stdin is working)
 
 ```
