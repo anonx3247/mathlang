@@ -20,7 +20,7 @@ func replace(math string) (s string) {
 	corrected = replaceShape(corrected)
 	corrected = replaceSymbol(corrected)
 	corrected = replaceText(corrected)
-	corrected = replaceMatrix(corrected)
+	corrected = getMatrix(corrected)
 	s += corrected
 	return
 }
