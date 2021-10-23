@@ -10,8 +10,7 @@ import (
 
 func DefaultMathRegexp() (def map[string]*regexp.Regexp, err error) {
 
-	//JSONFile := "/home/neosapien/.config/formula/syntax_regexp.json"
-	JSONFile := "/home/neosapien/development/go/mathlang/syntax_regexp.json"
+	JSONFile := os.ExpandEnv("$HOME/.config/mathlang/syntax_regexp.json")
 
 	//check if file is readable
 	test, readError := os.Open(JSONFile)
