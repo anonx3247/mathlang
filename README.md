@@ -14,39 +14,42 @@ or other.
 
 Here you can see a few examples of what mathlang is capable of:
 
-### Mathlang
+### Vectors, hats, and column vectors
+##### Mathlang
 ```
 u^{->} : [{ i^{^}; j^{^}}] 
 ```
-### \LaTeX
-```
+##### LaTeX
+```latex
 \overrightarrow{u} : \left[\begin{matrix} \hat{i}\\ \hat{j}\end{matrix}\right] 
 ```
-### Mathlang
+### Sets, / alternate symbols
+##### Mathlang
 ```
 RR^{_} = RR cup \{+- inf\}
 ```
-### \LaTeX
-```
+##### LaTeX
+```latex
 \overline{\mathbb{R}} = \mathbb{R} \cup \{\pm \infty\}
 ```
-### Mathlang
-
+### Sums, fractions, matrices (`\binom`)
+##### Mathlang
 ```
 sum_{k=0}^n ({n;k}) ( alpha/beta )^{n-k} ( gamma/delta )^k = ( alpha/beta + gamma/delta )^n
 ```
-### \LaTeX
-```
+##### LaTeX
+```latex
 \sum_{k=0}^n \left(\begin{matrix}n\\k\end{matrix}\right) \left( \frac{\alpha}{\beta}
 \right)^{n-k} \left( \frac{\gamma}{\delta} \right)^k =
 \left( \frac{\alpha}{\beta} + \frac{\gamma}{\delta} \right)^n
 ```
-### Mathlang
+### Matrices
+##### Mathlang
 ```
 A = ({a,b,c;d,e,f;g,h,i})
 ```
-### \LaTeX
-```
+##### LaTeX
+```latex
 A = \left(\begin{matrix}a & b & c\\d & e & f\\g & h & i\end{matrix}\right)
 ```
 
