@@ -9,6 +9,47 @@ Thus mathlang converts its own syntax to pure math latex code, allowing you to w
 while always allowing you to change to a syntax understood by every math typesetting program wether it be Latex, Markdown, HTML,
 or other.
 
+
+## Brief Presentation
+
+Here you can see a few examples of what mathlang is capable of:
+
+### Mathlang
+```
+u^{->} : [{ i^{^}; j^{^}}] 
+```
+### \LaTeX
+```
+\overrightarrow{u} : \left[\begin{matrix} \hat{i}\\ \hat{j}\end{matrix}\right] 
+```
+### Mathlang
+```
+RR^{_} = RR cup \{+- inf\}
+```
+### \LaTeX
+```
+\overline{\mathbb{R}} = \mathbb{R} \cup \{\pm \infty\}
+```
+### Mathlang
+
+```
+sum_{k=0}^n ({n;k}) ( alpha/beta )^{n-k} ( gamma/delta )^k = ( alpha/beta + gamma/delta )^n
+```
+### \LaTeX
+```
+\sum_{k=0}^n \left(\begin{matrix}n\\k\end{matrix}\right) \left( \frac{\alpha}{\beta}
+\right)^{n-k} \left( \frac{\gamma}{\delta} \right)^k =
+\left( \frac{\alpha}{\beta} + \frac{\gamma}{\delta} \right)^n
+```
+### Mathlang
+```
+A = ({a,b,c;d,e,f;g,h,i})
+```
+### \LaTeX
+```
+A = \left(\begin{matrix}a & b & c\\d & e & f\\g & h & i\end{matrix}\right)
+```
+
 ## Dependencies
 This uses standard go libraries so it doesn't need particular dependencies, simply install go.
 
