@@ -1,7 +1,10 @@
 package main
 
+//*---------------------*//
+// REPLACEMENT FUNCTIONS //
+//*---------------------*//
+
 import (
-	"fmt"
 	"regexp"
 	"strings"
 )
@@ -17,7 +20,7 @@ func replace(math string) (s string) {
 	corrected = replaceKeywords(corrected)
 	corrected = getMatrix(corrected)
 	corrected = replaceFrac(corrected)
-	corrected = replaceParnethesis(corrected)
+	corrected = replaceBrackets(corrected)
 	corrected = replaceShape(corrected)
 	corrected = replaceSymbol(corrected)
 	corrected = replaceText(corrected)
@@ -27,10 +30,10 @@ func replace(math string) (s string) {
 
 // Replace fonts
 // i.e add latex "mathbb" or "mathcal" prefixes to certain matches
-func replaceFont(math string) (s string) {
+func replaceFont(math string) (corrected string) {
 	def, err := DefaultMathRegexp()
 	check(err)
-	corrected := math
+	corrected = math
 	mathbb := def["MathbbRegexp"]
 	mathcal := def["MathcalRegexp"]
 	matched := mathbb.MatchString(math)
@@ -41,17 +44,17 @@ func replaceFont(math string) (s string) {
 	if matched2 {
 		corrected = mathcal.ReplaceAllString(corrected, "\\mathcal{$1}")
 	}
-	s += fmt.Sprintf(corrected)
 	return
 }
 
 // Prepend with "\"
 // this makes "sin" -> "\sin" for example
-func replaceKeywords(math string) (s string) {
+func replaceKeywords(math string) (corrected string) {
 	def, err := DefaultMathRegexp()
 	check(err)
+	corrected = math
 
-	corrected := math
+	//helper function to prefix with backslash where needed
 	addBackslash := func(key string) {
 		ref := def[key]
 		matched := ref.MatchString(corrected)
@@ -65,38 +68,38 @@ func replaceKeywords(math string) (s string) {
 	addBackslash("LetterRegexp")
 	addBackslash("LogicRegexp")
 
+	// replace 'inf' with '\infty'
 	inf, err2 := regexp.Compile("inf")
 	check(err2)
 	matchinf := inf.MatchString(math)
 	if matchinf {
 		corrected = inf.ReplaceAllString(corrected, "\\infty")
 	}
-
-	s += fmt.Sprintf(corrected)
 	return
 }
 
-func replaceFrac(math string) (s string) {
+// replaces "a/b" or "{a + b}/{c + d} with \frac{a}{b} or \frac{a + b}/{c + d}
+// currently a WIP
+// nested fractions are unavailable yet
+func replaceFrac(math string) (corrected string) {
 	def, err := DefaultMathRegexp()
 	check(err)
 
-	corrected := math
+	corrected = math
 	frac := def["FracRegexp"]
 	matched := frac.MatchString(math)
 	if matched {
 		corrected = frac.ReplaceAllString(math, "\\frac{$1}{$2}")
 	}
-
-	s += fmt.Sprintf(corrected)
 	return
 }
 
 // Parenthesis, brakets, and braces
 // this will change brakets in favour of size-adjusting ones:
 // thus ( -> \left( and ] -> \right]
-func replaceParnethesis(math string) (s string) {
+func replaceBrackets(math string) (corrected string) {
 
-	corrected := math
+	corrected = math
 	replBr := func(lStr, rStr string) {
 		left, err := regexp.Compile("\\" + lStr)
 		right, err2 := regexp.Compile("\\" + rStr)
@@ -114,14 +117,16 @@ func replaceParnethesis(math string) (s string) {
 
 	replBr("(", ")")
 	replBr("[", "]")
-	s += fmt.Sprintf(corrected)
 	return
 }
 
 // Symbol transforms
 // will change "=>" to "\implies" for example
-func replaceSymbol(math string) (s string) {
-	s = math
+func replaceSymbol(math string) (corrected string) {
+	corrected = math
+
+	// TODO: this should probably be stored in the syntac json file
+	// thus changing syntax could be more modular and extensible
 	repls := map[string]string{
 		"<=>": "\\iff",
 		"=>":  "\\implies",
@@ -138,29 +143,29 @@ func replaceSymbol(math string) (s string) {
 		".":   "\\cdot",
 	}
 	for k, v := range repls {
-		s = strings.ReplaceAll(s, k, v)
+		corrected = strings.ReplaceAll(corrected, k, v)
 	}
-
 	return
 }
 
-func replaceText(math string) (s string) {
+// this makes text syntax easier, using "text" instead of \text{text}
+func replaceText(math string) (corrected string) {
 	def, err := DefaultMathRegexp()
 	check(err)
-	corrected := math
+	corrected = math
 	text := def["TextRegexp"]
 	matched := text.MatchString(math)
 	if matched {
 		corrected = text.ReplaceAllString(math, "\\text{$1}")
 	}
-	s += fmt.Sprintf(corrected)
 	return
 }
 
-func replaceShape(math string) (s string) {
+// replaces "u^{_} with "\overline{u}" and other replacements
+func replaceShape(math string) (corrected string) { // TODO: find a better name for this function
 	def, err := DefaultMathRegexp()
 	check(err)
-	corrected := math
+	corrected = math
 	shape := def["ShapeRegexp"]
 	matched := shape.MatchString(math)
 
@@ -172,25 +177,28 @@ func replaceShape(math string) (s string) {
 		corrected = shape.ReplaceAllString(math, "\\($2){$1}")
 		repl("(_)", "overline")
 		repl("(->)", "overrightarrow")
+		// the only reason this is here is in case I change the order of
+		// the replace functions
 		repl("(\\to)", "overrightarrow")
 		repl("(^)", "hat")
 		repl("(~)", "tilde")
 		repl("(.)", "dot")
 	}
-	s += corrected
 	return
 }
 
-func replaceMatrix(math string) (s string) {
+// DEPRECATED
+/*
+func replaceMatrix(math string) (corrected string) {
 	def, err := DefaultMathRegexp()
 	check(err)
-	corrected := math
+	corrected = math
 	matrix := def["MatrixRegexp"]
 	matched := matrix.MatchString(math)
 	if matched {
 		corrected = matrix.ReplaceAllString(corrected, "\\begin{matrix}\n$1\n\\end{matrix}")
 		corrected = strings.ReplaceAll(corrected, ";", "\\\\\n")
 	}
-	s = corrected
 	return
 }
+*/

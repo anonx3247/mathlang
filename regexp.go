@@ -1,5 +1,9 @@
 package main
 
+//*-----------------------*//
+// JSON FILE REGEXP PARSER //
+//*-----------------------*//
+
 import (
 	"encoding/json"
 	"fmt"
@@ -8,6 +12,8 @@ import (
 	"regexp"
 )
 
+// This will serve as a tool to get access to all the regexps stored in
+// the "syntax_regexp.json" file
 func DefaultMathRegexp() (def map[string]*regexp.Regexp, err error) {
 
 	JSONFile := os.ExpandEnv("$HOME/.config/mathlang/syntax_regexp.json")
@@ -21,12 +27,13 @@ func DefaultMathRegexp() (def map[string]*regexp.Regexp, err error) {
 	check(readError)
 	test.Close()
 
+	// helper function to parse json file and then compile its regexp
 	read := func(key string) (re *regexp.Regexp) {
 		re, _ = regexp.Compile(JSONRead(JSONFile, key))
 		return
 	}
 
-	// EXTRA
+	// definition of the returned dictionary
 	def = map[string]*regexp.Regexp{
 		"FunctionRegexp": read("function"),
 		"LetterRegexp":   read("letters"),
@@ -39,39 +46,28 @@ func DefaultMathRegexp() (def map[string]*regexp.Regexp, err error) {
 		"TextRegexp":     read("text"),
 		"MatrixRegexp":   read("matrix"),
 	}
-
-	/*
-		def = map[string]*regexp.Regexp{
-			"FunctionRegexp": FunctionRegexp,
-			"SymbolRegexp":   SymbolRegexp,
-			"LetterRegexp":   LetterRegexp,
-			"LogicRegexp":    LogicRegexp,
-			"ShapeRegexp":    ShapeRegexp,
-			"MathbbRegexp":   MathbbRegexp,
-			"MathcalRegexp":  MathcalRegexp,
-			"FracRegexp":     FracRegexp,
-			"TextRegexp":     TextRegexp,
-			"MatrixRegexp":   MatrixRegexp,
-		}
-	*/
 	return
 }
 
+// parses json file with a given key, and returns
+// the value stored for that key
 func JSONRead(file, key string) (value string) {
 	data, err := ioutil.ReadFile(file)
 
+	// check for errors
 	if err != nil {
 		panic(err)
 	}
 
+	// create a map of keys to values from json file
 	var jsonMap map[string]string
-
 	err2 := json.Unmarshal(data, &jsonMap)
 
 	if err2 != nil {
 		panic(err2)
 	}
 
+	// check if the requested key is in the file
 	val, ok := jsonMap[key]
 
 	if !ok {
