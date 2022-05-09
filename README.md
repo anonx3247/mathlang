@@ -24,13 +24,13 @@ cd mathlang
 
 To test it out run:
 
-```
+```bash
 make
 ```
 
 To install run:
 
-```
+```bash
 sudo make install
 ```
 
@@ -38,12 +38,12 @@ sudo make install
 
 ## Usage
 
-```
+```bash
 mathlang -e "expression"
 ```
 This will output the "translation" of the expression into \LaTeX
 
-```
+```bash
 ... | mathlang
 ```
 This will output the `STDIN` translated into \LaTeX
@@ -51,7 +51,7 @@ This can be very useful in certain editors for example, `kakoune`
 by piping the content of a line and binding it, you can translate
 mathlang to \LaTeX on the fly in one keystroke.
 
-```
+```bash
 mathlang -d
 ```
 
@@ -60,7 +60,7 @@ thus allowing you to pipe an entire **file** into the converter and only change 
 the delimiters.
 
 This allows `mathlang` to be used as a preprocessor, e.g:
-```
+```bash
 mathlang -df "myfile.md" | pandoc -o myfile.pdf
 ```
 
@@ -160,11 +160,11 @@ A = \left(\begin{matrix} a & b & c \\ d & e & f \\ g & h & i \end{matrix}\right)
 It can also be good for other formatting:
 
 ```
-(a+b)^n = sum_{k=0}^n &{n;k} a^k b^{n-k}
+(a+b)^n = sum_{k=0}^n (&{n;k}) a^k b^{n-k}
 ```
 
 ```latex
-\left(a+b\right)^n = \sum_{k=0}^n \begin{pmatrix} n \\ k \end{pmatrix} a^k b^{n-k}
+\left(a+b\right)^n = \sum_{k=0}^n \left(\begin{matrix} n \\ k \end{matrix}\right) a^k b^{n-k}
 ```
 
 ### Case statements
