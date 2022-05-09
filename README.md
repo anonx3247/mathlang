@@ -125,7 +125,7 @@ Parenthesis are already chosen to be the size-adjusting type, wether you need th
 A = &{a,b,c;d,e,f;g,h,i}
 ```
 
-```
+```latex
 A = \begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix}
 ```
 
@@ -135,6 +135,6 @@ It can also be good for other formatting:
 (a+b)^n = sum_{k=0}^n &{n,k} a^k b^{n-k}
 ```
 
-```
+```latex
 \left(a+b\right)^n = \sum_{k=0}^n \begin{pmatrix} n & k \end{pmatrix} a^k b^{n-k}
 ```
