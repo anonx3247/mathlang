@@ -11,6 +11,17 @@ or other.
 
 ## Installation
 
+(Note: this will run only on Linux/MacOS/Unix (i.e. not windows))
+
+You need the [go language](https://go.dev/) installed
+as well as [git](https://git-scm.com/) (this should already be installed on MacOS)
+
+Open a terminal and run:
+```bash
+git clone https://github.com/neosapien3247/mathlang
+cd mathlang
+```
+
 To test it out run:
 
 ```
