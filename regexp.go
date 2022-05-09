@@ -8,7 +8,7 @@ import (
 	"regexp"
 )
 
-func DefaultMathRegexp() (def map[string]*regexp.Regexp, err error) {
+func DefaultMathRegexp() (def map[string]*regexp.Regexp) {
 
 	bkpJSONFile := "syntax_regexp.json"
 	JSONFile := "/usr/local/share/mathlang/syntax_regexp.json"
@@ -17,18 +17,14 @@ func DefaultMathRegexp() (def map[string]*regexp.Regexp, err error) {
 	//check if file is readable
 	test, readError := os.Open(JSONFile)
 	if readError != nil {
-		err = readError
 		bkp, bkpError := os.Open(bkpJSONFile)
 		if bkpError != nil {
-			err = readError
-			return
+			panic("'/usr/local/share/mathlang/syntax_regexp.json' file missing!")
 		} else {
 			file = bkpJSONFile
 		}
-		check(bkpError)
 		bkp.Close()
 	}
-	check(readError)
 	test.Close()
 
 	read := func(key string) (re *regexp.Regexp) {

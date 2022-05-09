@@ -28,8 +28,7 @@ func replace(math string) (s string) {
 // Replace fonts
 // i.e add latex "mathbb" or "mathcal" prefixes to certain matches
 func replaceFont(math string) (s string) {
-	def, err := DefaultMathRegexp()
-	check(err)
+	def := DefaultMathRegexp()
 	corrected := math
 	mathbb := def["MathbbRegexp"]
 	mathcal := def["MathcalRegexp"]
@@ -48,8 +47,7 @@ func replaceFont(math string) (s string) {
 // Prepend with "\"
 // this makes "sin" -> "\sin" for example
 func replaceKeywords(math string) (s string) {
-	def, err := DefaultMathRegexp()
-	check(err)
+	def := DefaultMathRegexp()
 
 	corrected := math
 	addBackslash := func(key string) {
@@ -194,21 +192,6 @@ func replaceFrac(math string) (s string) {
 	return
 }
 
-/*func replaceFrac(math string) (s string) {
-	def, err := DefaultMathRegexp()
-	check(err)
-
-	corrected := math
-	frac := def["FracRegexp"]
-	matched := frac.MatchString(math)
-	if matched {
-		corrected = frac.ReplaceAllString(math, "\\frac{$1}{$2}")
-	}
-
-	s += fmt.Sprintf(corrected)
-	return
-}*/
-
 func getMatchingBracket(str string, loc int, direction string) (match int) {
 	if loc == len(str)-1 {
 		panic("Open bracket at end of string!")
@@ -317,8 +300,7 @@ func replaceSymbol(math string) (s string) {
 }
 
 func replaceText(math string) (s string) {
-	def, err := DefaultMathRegexp()
-	check(err)
+	def := DefaultMathRegexp()
 	corrected := math
 	text := def["TextRegexp"]
 	matched := text.MatchString(math)
@@ -330,8 +312,7 @@ func replaceText(math string) (s string) {
 }
 
 func replaceShape(math string) (s string) {
-	def, err := DefaultMathRegexp()
-	check(err)
+	def := DefaultMathRegexp()
 	corrected := math
 	shape := def["ShapeRegexp"]
 	matched := shape.MatchString(math)
@@ -394,17 +375,3 @@ func replaceMatrix(math string) (s string) {
 	}
 	return
 }
-
-/*func replaceMatrix(math string) (s string) {
-	def, err := DefaultMathRegexp()
-	check(err)
-	corrected := math
-	matrix := def["MatrixRegexp"]
-	matched := matrix.MatchString(math)
-	if matched {
-		corrected = matrix.ReplaceAllString(corrected, "\\begin{matrix}\n$1\n\\end{matrix}")
-		corrected = strings.ReplaceAll(corrected, ";", "\\\\\n")
-	}
-	s = corrected
-	return
-}*/
