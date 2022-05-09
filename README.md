@@ -119,14 +119,31 @@ Parenthesis are already chosen to be the size-adjusting type, wether you need th
 \left(a+b\right)
 ```
 
-### Matrices, made easy
+### Simple, memorable shortcuts
 
 ```
-A = &{a,b,c;d,e,f;g,h,i}
+forall n in NN^{*}, forall x in RR, x >= 1 => |x^n| >= x
 ```
 
 ```latex
-A = \begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix}
+\forall n \in \mathbb{N}^{*}, \forall x \in \mathbb{R}, x \ge 1 \implies |x^n| \ge x
+```
+
+```
+RR^{_} = RR cup \{ +- inf\}
+```
+
+```latex
+\overline{\mathbb{R}} = \mathbb{R} \cup \{ \pm \infty\}
+```
+### Matrices, made easy
+
+```
+A = (&{a,b,c;d,e,f;g,h,i})
+```
+
+```latex
+A = \left(\begin{matrix} a & b & c \\ d & e & f \\ g & h & i \end{matrix}\right)
 ```
 
 It can also be good for other formatting:
@@ -138,3 +155,14 @@ It can also be good for other formatting:
 ```latex
 \left(a+b\right)^n = \sum_{k=0}^n \begin{pmatrix} n \\ k \end{pmatrix} a^k b^{n-k}
 ```
+
+### Case statements
+
+```
+@{ f : RR, -> RR; x, |-> x^2}
+```
+  
+```latex
+\begin{cases}  f : \mathbb{R} &  \to \mathbb{R} \\  x &  \mapsto x^2 \end{cases}
+```
+

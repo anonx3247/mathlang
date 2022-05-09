@@ -21,6 +21,7 @@ func replace(math string) (s string) {
 	corrected = replaceSymbol(corrected)
 	corrected = replaceText(corrected)
 	corrected = replaceMatrix(corrected)
+	corrected = replaceCase(corrected)
 	s += corrected
 	return
 }
@@ -263,8 +264,8 @@ func replaceSymbol(math string) (s string) {
 	symbols := []string{
 		"<=>",
 		"=>",
-		"->",
 		"|->",
+		"->",
 		">=",
 		"<=",
 		"!=",
@@ -279,8 +280,8 @@ func replaceSymbol(math string) (s string) {
 	repls := []string{
 		"\\iff",
 		"\\implies",
-		"\\to",
 		"\\mapsto",
+		"\\to",
 		"\\ge",
 		"\\le",
 		"\\neq",
@@ -354,7 +355,7 @@ func replaceMatrix(math string) (s string) {
 	}
 
 	repl := func(start int, end int) string {
-		f := "\\begin{pmatrix} "
+		f := "\\begin{matrix} "
 		m := math[start+2 : end]
 
 		m = strings.ReplaceAll(m, ",", " & ")
@@ -362,7 +363,48 @@ func replaceMatrix(math string) (s string) {
 
 		f += m
 
-		f += " \\end{pmatrix}"
+		f += " \\end{matrix}"
+		return f
+	}
+
+	s = math[0:starts[0]]
+	for i := 0; i < len(starts); i++ {
+		s += repl(starts[i], ends[i])
+	}
+	if len(math) > ends[len(ends)-1]+1 {
+		s += math[ends[len(ends)-1]+1:]
+	}
+	return
+}
+func replaceCase(math string) (s string) {
+	s = math
+	found := false
+	starts := make([]int, 0)
+	for i := 0; i < len(math)-2; i++ {
+		if math[i:i+2] == "@{" {
+			found = true
+			starts = append(starts, i)
+		}
+	}
+	if !found {
+		return
+	}
+	ends := make([]int, 0)
+
+	for _, i := range starts {
+		ends = append(ends, getMatchingBracket(math, i+1, "right"))
+	}
+
+	repl := func(start int, end int) string {
+		f := "\\begin{cases} "
+		m := math[start+2 : end]
+
+		m = strings.ReplaceAll(m, ",", " & ")
+		m = strings.ReplaceAll(m, ";", " \\\\ ")
+
+		f += m
+
+		f += " \\end{cases}"
 		return f
 	}
 

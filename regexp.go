@@ -36,7 +36,6 @@ func DefaultMathRegexp() (def map[string]*regexp.Regexp) {
 	def = map[string]*regexp.Regexp{
 		"FunctionRegexp": read("function"),
 		"LetterRegexp":   read("letters"),
-		"SymbolRegexp":   read("symbol"),
 		"LogicRegexp":    read("logic"),
 		"ShapeRegexp":    read("shape"),
 		"MathbbRegexp":   read("mathbb"),
