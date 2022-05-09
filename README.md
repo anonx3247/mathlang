@@ -13,13 +13,13 @@ or other.
 
 To test it out run:
 
-```
+```bash
 make
 ```
 
 To install run:
 
-```
+```bash
 sudo make install
 ```
 
@@ -27,12 +27,12 @@ sudo make install
 
 ## Usage
 
-```
+```bash
 mathlang -e "expression"
 ```
 This will output the "translation" of the expression into \LaTeX
 
-```
+```bash
 ... | mathlang
 ```
 This will output the `STDIN` translated into \LaTeX
@@ -40,7 +40,7 @@ This can be very useful in certain editors for example, `kakoune`
 by piping the content of a line and binding it, you can translate
 mathlang to \LaTeX on the fly in one keystroke.
 
-```
+```bash
 mathlang -d
 ```
 
@@ -49,7 +49,7 @@ thus allowing you to pipe an entire **file** into the converter and only change 
 the delimiters.
 
 This allows `mathlang` to be used as a preprocessor, e.g:
-```
+```bash
 mathlang -df "myfile.md" | pandoc -o myfile.pdf
 ```
 
