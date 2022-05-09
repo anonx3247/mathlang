@@ -10,20 +10,29 @@ import (
 
 func DefaultMathRegexp() (def map[string]*regexp.Regexp, err error) {
 
-	//JSONFile := "/home/neosapien/development/go/mathlang/syntax_regexp.json"
+	bkpJSONFile := "syntax_regexp.json"
 	JSONFile := "/usr/local/share/mathlang/syntax_regexp.json"
+	file := JSONFile
 
 	//check if file is readable
 	test, readError := os.Open(JSONFile)
 	if readError != nil {
 		err = readError
-		return
+		bkp, bkpError := os.Open(bkpJSONFile)
+		if bkpError != nil {
+			err = readError
+			return
+		} else {
+			file = bkpJSONFile
+		}
+		check(bkpError)
+		bkp.Close()
 	}
 	check(readError)
 	test.Close()
 
 	read := func(key string) (re *regexp.Regexp) {
-		re, _ = regexp.Compile(JSONRead(JSONFile, key))
+		re, _ = regexp.Compile(JSONRead(file, key))
 		return
 	}
 

@@ -25,7 +25,7 @@ by piping the content of a line and binding it, you can translate
 mathlang to \LaTeX on the fly in one keystroke.
 
 ```
-mathlang -rD "\[" -lD "\]"
+mathlang -d
 ```
 
 This allows you to specify delimiters for mathlang code,
@@ -34,9 +34,5 @@ the delimiters.
 
 This allows `mathlang` to be used as a preprocessor, e.g:
 ```
-mathlang -D "$$" -d "$" -f "myfile.md" | pandoc -o myfile.pdf
+mathlang -df "myfile.md" | pandoc -o myfile.pdf
 ```
-
-Note here the options "-D" and "-d" without "r" or "l" are for delimiters which aren't different depending on orientation
-with "-D" for display equation delimiters and "-d" for inline equation delimiters.
-
