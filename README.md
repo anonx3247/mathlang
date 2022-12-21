@@ -107,7 +107,6 @@ See the [wiki](https://github.com/neosapien3247/mathlang/wiki) for syntax
 
 ## Projected Usage (currently only piping to stdin is working)
 
->>>>>>> parent of aaa7ce7 (Completed project)
 ```bash
 mathlang -e "expression"
 ```
@@ -125,7 +124,6 @@ mathlang to \LaTeX on the fly in one keystroke.
 mathlang -d
 =======
 mathlang -rD "\[" -lD "\]"
->>>>>>> parent of aaa7ce7 (Completed project)
 ```
 
 This allows you to specify delimiters for mathlang code,
@@ -134,11 +132,9 @@ the delimiters.
 
 This allows `mathlang` to be used as a preprocessor, e.g:
 ```bash
-<<<<<<< HEAD
 mathlang -df "myfile.md" | pandoc -o myfile.pdf
 =======
 mathlang -D "$$" -d "$" -f "myfile.md" | pandoc -o myfile.pdf
->>>>>>> parent of aaa7ce7 (Completed project)
 ```
 
 ## Examples
