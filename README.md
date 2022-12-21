@@ -9,7 +9,6 @@ Thus mathlang converts its own syntax to pure math latex code, allowing you to w
 while always allowing you to change to a syntax understood by every math typesetting program wether it be Latex, Markdown, HTML,
 or other.
 
-<<<<<<< HEAD
 ## Installation
 
 (Note: this will run only on Linux/MacOS/Unix (i.e. not windows))
@@ -123,7 +122,6 @@ by piping the content of a line and binding it, you can translate
 mathlang to \LaTeX on the fly in one keystroke.
 
 ```bash
-<<<<<<< HEAD
 mathlang -d
 =======
 mathlang -rD "\[" -lD "\]"
