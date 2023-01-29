@@ -4,6 +4,7 @@ default:
 install:
 	go fmt
 	go build --buildvcs=false
+	go build
+	mkdir -p $HOME/.config/mathlang
+	cp syntax_regexp.json $HOME/.config/mathlang/
 	cp mathlang /usr/local/bin
-	mkdir -p /usr/local/share/mathlang
-	cp syntax_regexp.json /usr/local/share/mathlang
