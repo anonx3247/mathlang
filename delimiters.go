@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func findDelimiters(txt String) (delims []int) {
+func findDelimiters(txt string) (delims []int) {
 	delims = make([]int, 0)
 
 	// first search for double delimiters : $$math$$
@@ -29,9 +29,9 @@ func findDelimiters(txt String) (delims []int) {
 	return
 }
 
-func smartReplace(math String) (s String) {
+func smartReplace(math string) (s string) {
 	s = ""
-	if len(math) < 2 {
+	if len(math) < 3 {
 		panic("string too short!")
 	} else {
 		if math[1] == '$' {
@@ -50,7 +50,7 @@ func smartReplace(math String) (s String) {
 	}
 }
 
-func replaceBetweenDelimiters(math String) (s String) {
+func replaceBetweenDelimiters(math string) (s string) {
 	delims := findDelimiters(math)
 
 	s = math[0:delims[0]]

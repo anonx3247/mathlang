@@ -11,13 +11,15 @@ import (
 //*------------------------*//
 
 // general function to panic on errors
-func check(err error) {
-	if err != nil {
-		panic(err)
+func check(err ...error) {
+	for _, e := range err {
+		if e != nil {
+			panic(e)
+		}
 	}
 }
 
-//injects strings at given locations
+// injects strings at given locations
 // takes three arguments: string to modify, map of position/things to replace, map of position / things to replace with
 func inject(s string, before, after map[int]string) (ret string) {
 	// first check that the maps have the same locations
