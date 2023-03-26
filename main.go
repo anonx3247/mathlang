@@ -13,6 +13,11 @@ import (
 
 func main() {
 	// take stdin as input
+
+	if len(os.Args) <= 1 {
+		printHelp()
+		os.Exit(1)
+	}
 	if os.Args[1] == "-" {
 		//if os.Stdin != nil {
 		scanner := bufio.NewScanner(os.Stdin)
@@ -48,6 +53,7 @@ func main() {
 		// read file given as shell arg
 	} else {
 		printHelp()
+		os.Exit(1)
 	}
 
 }
