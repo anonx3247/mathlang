@@ -41,7 +41,6 @@ func main() {
 		for scanner.Scan() {
 			math += scanner.Text() + "\n"
 		}
-		fmt.Println(math)
 		if os.Args[1] == "-fd" || os.Args[1] == "-df" {
 			fmt.Print(translate(math, true))
 		} else {

@@ -266,3 +266,5 @@ It can also be good for other formatting:
 \begin{cases}  f : \mathbb{R} &  \to \mathbb{R} \\  x &  \mapsto x^2 \end{cases}
 ```
 
+
+## You can test it out yourself with the test file (`test.md`) to get the `test.pdf` output with pandoc
