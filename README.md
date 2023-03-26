@@ -104,7 +104,7 @@ sudo make install
 ## Syntax
 See the [wiki](https://github.com/neosapien3247/mathlang/wiki) for syntax
 
-## Projected Usage (currently only piping to stdin is working)
+##  Usage
 
 ```bash
 mathlang -e "expression"
@@ -112,7 +112,7 @@ mathlang -e "expression"
 This will output the "translation" of the expression into \LaTeX
 
 ```bash
-... | mathlang
+... | mathlang -
 ```
 This will output the `STDIN` translated into \LaTeX
 This can be very useful in certain editors for example, `kakoune`
@@ -121,17 +121,15 @@ mathlang to \LaTeX on the fly in one keystroke.
 
 ```bash
 mathlang -d
-mathlang -rD "\[" -lD "\]"
 ```
 
-This allows you to specify delimiters for mathlang code,
+This allows you to only convert what is between delimiters for mathlang code,
 thus allowing you to pipe an entire **file** into the converter and only change things between
-the delimiters.
+the delimiters. (the delimiters are $$)
 
 This allows `mathlang` to be used as a preprocessor, e.g:
 ```bash
 mathlang -df "myfile.md" | pandoc -o myfile.pdf
-mathlang -D "$$" -d "$" -f "myfile.md" | pandoc -o myfile.pdf
 ```
 
 ## Examples
